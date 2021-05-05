@@ -4,7 +4,9 @@ import styled from 'styled-components'
 const Header = () => {
     return (
         <StyledNav>
-            <StyledLogo src="/images/logo.svg" alt="logo" />
+            <StyledLogo>
+                <img src="/images/logo.svg" alt="logo"/>
+            </StyledLogo>
             <StyledNavMenu>
                 <a href="/">
                     <img src="/images/home-icon.svg" alt="home-icon"/>
@@ -31,7 +33,9 @@ const Header = () => {
                     <span>Series</span>
                 </a>
             </StyledNavMenu>
-            <StyledUserImg src="https://lh3.googleusercontent.com/ogw/ADGmqu_IqcHYZGGEcg4ovshLf4MARoI62CWyWSdHLp-zbg=s32-c-mo" alt="user" />
+            <StyledLogin >
+                Login
+            </StyledLogin>
         </StyledNav>
     )
 }
@@ -50,8 +54,17 @@ const StyledNav = styled.nav`
     z-index: 3;
 `
 
-const StyledLogo = styled.img`
+const StyledLogo = styled.a`
+    padding: 0;
     width: 80px;
+    margin-top: 4px;
+    max-height: 70px;
+    font-size: 0;
+    display: inline-block;
+    img {
+        display: block;
+        width: 100%;
+    }
 `
 
 const StyledNavMenu = styled.div`
@@ -101,11 +114,22 @@ const StyledNavMenu = styled.div`
     }
 `
 
-const StyledUserImg = styled.img`
-    width: 40px;
-    width: 40px;
-    border-radius: 50%;
-    cursor: pointer;
+const StyledLogin = styled.a`
+    background-color: rgba(0, 0, 0, 0.6);
+    padding: 8px 16px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    border: 1px solid #f9f9f9;
+    border-radius: 4px;
     margin-left: auto;
+    cursor: pointer;
+    transition: all 0.2s ease 0s;
+    outline: none;
+
+    &:hover {
+        background-color: #f9f9f9;
+        color: #000;
+        border-color: transparent;
+    }
 `
 export default Header
