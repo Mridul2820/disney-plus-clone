@@ -13,10 +13,27 @@ const GlobalStyle = createGlobalStyle`
     body {
         font-family: 'Noto Sans JP', sans-serif;
         background-color: #040714;
+
+        @media only screen and (min-width: 768px) {
+            font-size: 16px;
+        }
+
+        @media only screen and (min-width: 480px) and (max-width: 768px) {
+            font-size: 15px;
+        }
+    
+        @media only screen and (max-width: 479px) {
+            font-size: 14px;
+        }
     }
 
     html {
         scroll-behavior: smooth;
+    }
+
+    a {
+        color: #f9f9f9;
+        text-decoration: none;
     }
 `
 
