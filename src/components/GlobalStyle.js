@@ -14,6 +14,10 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Noto Sans JP', sans-serif;
         background-color: #040714;
     }
+
+    html {
+        scroll-behavior: smooth;
+    }
 `
 
 export default GlobalStyle;
