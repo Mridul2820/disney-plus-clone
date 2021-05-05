@@ -70,7 +70,7 @@ const StyledCTA = styled.div`
 
 const StyledCTALogoOne = styled.img`
     margin-bottom: 12px;
-    max-width: 600px;
+    /* max-width: 600px; */
     min-height: 1px;
     display: block;
     width: 100%;
@@ -103,7 +103,7 @@ const StyledDescription = styled.p`
 `
 
 const StyledCTALogoTwo = styled.img`
-    max-width: 600px;
+    /* max-width: 600px; */
     margin-bottom: 20px;
     display: inline-block;
     vertical-align: bottom;

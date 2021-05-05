@@ -37,17 +37,21 @@ const Header = () => {
 }
 
 const StyledNav = styled.nav`
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
     height: 70px;
     background-color: #090b13;
     display: flex;
     align-items: center;
     padding: 0 36px;
-    overflow-x: hidden;
+    letter-spacing: 16px;
+    z-index: 3;
 `
 
 const StyledLogo = styled.img`
     width: 80px;
-
 `
 
 const StyledNavMenu = styled.div`
@@ -74,7 +78,7 @@ const StyledNavMenu = styled.div`
             &:after {
                 content: '';
                 height: 2px;
-                background: #fff;
+                background-color: rgb(249, 249, 249);
                 position: absolute;
                 bottom: -6px;
                 right: 0;
@@ -82,14 +86,16 @@ const StyledNavMenu = styled.div`
                 transform: scaleX(0);
                 opacity: 0;
                 transform-origin: right center;
-                transition: .5s;
+                transition: all 250ms cubic-bezier(0.25, 0.46, 0.45, 0.94) 0s;
+                visibility: hidden;
             }
         }
 
         &:hover {
             span:after {
                 transform: scaleX(1);
-                opacity: 1
+                opacity: 1;
+                visibility: visible;
             }
         }
     }

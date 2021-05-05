@@ -10,6 +10,7 @@ const App = () => {
         <div className="app">
             <GlobalStyle />
             <Router>
+            <Header />
                 <Switch>
                     <Route exact path="/" >
                         <Login />
@@ -18,7 +19,7 @@ const App = () => {
             </Router>
 
             {/* 
-            <Header />
+            
             <Home /> */}
         </div>
     )
