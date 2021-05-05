@@ -1,7 +1,30 @@
 import React from 'react'
 import styled from 'styled-components'
+import { auth, provider } from '../firebase/firebase';
 
 const Header = () => {
+    const handleAuth = () => {
+        // if (!userName) {
+            auth
+                .signInWithPopup(provider)
+                .then((result) => {
+                    console.log(result);
+                    // setUser(result.user);
+                })
+                .catch((error) => {
+                    alert(error.message);
+                });
+        // } 
+        // else if (userName) {
+        //     auth
+        //         .signOut()
+        //         .then(() => {
+        //         dispatch(setSignOutState());
+        //             history.push("/");
+        //         })
+        //         .catch((err) => alert(err.message));
+        // }
+    };
     return (
         <StyledNav>
             <StyledLogo>
@@ -33,7 +56,7 @@ const Header = () => {
                     <span>Series</span>
                 </a>
             </StyledNavMenu>
-            <StyledLogin >
+            <StyledLogin onClick={handleAuth} >
                 Login
             </StyledLogin>
         </StyledNav>

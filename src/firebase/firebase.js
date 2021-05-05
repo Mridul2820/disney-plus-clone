@@ -1,3 +1,5 @@
+import firebase from "firebase";
+
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE,
     authDomain: "app-builds-55eef.firebaseapp.com",
