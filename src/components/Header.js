@@ -1,15 +1,22 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useDispatch, useSelector } from 'react-redux'
+import { useHistory } from 'react-router-dom';
 import { auth, provider } from '../firebase/firebase';
+import { selectUserName, setLoginCredentials, selectUserPhoto, setSignOutState } from "../features/user/userSlice";
 
 const Header = () => {
+    const dispatch = useDispatch()
+    const history = useHistory()
+    const userName = useSelector(selectUserName)
+    const userPhoto = useSelector(selectUserPhoto)
+
     const handleAuth = () => {
         // if (!userName) {
             auth
                 .signInWithPopup(provider)
                 .then((result) => {
-                    console.log(result);
-                    // setUser(result.user);
+                    setUser(result.user);
                 })
                 .catch((error) => {
                     alert(error.message);
@@ -25,40 +32,53 @@ const Header = () => {
         //         .catch((err) => alert(err.message));
         // }
     };
+
+    const setUser = (user) => {
+        dispatch(setLoginCredentials({
+            name: user.displayName,
+            email: user.email,
+            photo: user.photoURL
+        }))
+    }
+
     return (
         <StyledNav>
             <StyledLogo>
                 <img src="/images/logo.svg" alt="logo"/>
             </StyledLogo>
-            <StyledNavMenu>
-                <a href="/">
-                    <img src="/images/home-icon.svg" alt="home-icon"/>
-                    <span>Home</span>
-                </a>
-                <a href="/">
-                    <img src="/images/search-icon.svg" alt="search-icon"/>
-                    <span>Search</span>
-                </a>
-                <a href="/">
-                    <img src="/images/watchlist-icon.svg" alt="watchlist-icon"/>
-                    <span>Watchlist</span>
-                </a>
-                <a href="/">
-                    <img src="/images/original-icon.svg" alt="original-icon"/>
-                    <span>Originals</span>
-                </a>
-                <a href="/">
-                    <img src="/images/movie-icon.svg" alt="movie-icon"/>
-                    <span>Movies</span>
-                </a>
-                <a href="/">
-                    <img src="/images/series-icon.svg" alt="series-icon"/>
-                    <span>Series</span>
-                </a>
-            </StyledNavMenu>
-            <StyledLogin onClick={handleAuth} >
-                Login
-            </StyledLogin>
+            {!userName ? 
+                <StyledLogin onClick={handleAuth} >Login</StyledLogin>
+                :
+                <>
+                <StyledNavMenu>
+                    <a href="/">
+                        <img src="/images/home-icon.svg" alt="home-icon"/>
+                        <span>Home</span>
+                    </a>
+                    <a href="/">
+                        <img src="/images/search-icon.svg" alt="search-icon"/>
+                        <span>Search</span>
+                    </a>
+                    <a href="/">
+                        <img src="/images/watchlist-icon.svg" alt="watchlist-icon"/>
+                        <span>Watchlist</span>
+                    </a>
+                    <a href="/">
+                        <img src="/images/original-icon.svg" alt="original-icon"/>
+                        <span>Originals</span>
+                    </a>
+                    <a href="/">
+                        <img src="/images/movie-icon.svg" alt="movie-icon"/>
+                        <span>Movies</span>
+                    </a>
+                    <a href="/">
+                        <img src="/images/series-icon.svg" alt="series-icon"/>
+                        <span>Series</span>
+                    </a>
+                </StyledNavMenu>
+                <StyledUserImage src={userPhoto} alt={userName} />
+                </>
+            }
         </StyledNav>
     )
 }
@@ -154,5 +174,12 @@ const StyledLogin = styled.a`
         color: #000;
         border-color: transparent;
     }
+`
+
+const StyledUserImage = styled.img`
+    margin-left: auto;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
 `
 export default Header

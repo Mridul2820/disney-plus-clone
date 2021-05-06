@@ -2,12 +2,12 @@ import firebase from "firebase";
 
 const firebaseConfig = {
     apiKey: process.env.REACT_APP_FIREBASE,
-    authDomain: "app-builds-55eef.firebaseapp.com",
-    projectId: "app-builds-55eef",
-    storageBucket: "app-builds-55eef.appspot.com",
-    messagingSenderId: "1024975080340",
-    appId: "1:1024975080340:web:861a99d5343e3f29519d81",
-    measurementId: "G-27WY2MHRJ9"
+    authDomain: "disney-plus-clone-80f2b.firebaseapp.com",
+    projectId: "disney-plus-clone-80f2b",
+    storageBucket: "disney-plus-clone-80f2b.appspot.com",
+    messagingSenderId: "196756517220",
+    appId: "1:196756517220:web:b5563ed7e773fab68eca71",
+    measurementId: "G-XSLDPVCGK8"
 };
 
 const firebaseApp = firebase.initializeApp(firebaseConfig);
