@@ -25,22 +25,26 @@ const Home = () => {
     useEffect(() => {
         // console.log("hello");
         db.collection("movies").onSnapshot((snapshot) => {
-            snapshot.docs.map((doc) => {
-                // console.log(recommends);
+            snapshot.docs.forEach((doc) => {
+                
                 switch (doc.data().type) {
                 case "recommend":
+                    // eslint-disable-next-line
                     recommends = [...recommends, { id: doc.id, ...doc.data() }];
                     break;
         
                 case "new":
+                    // eslint-disable-next-line
                     newDisneys = [...newDisneys, { id: doc.id, ...doc.data() }];
                     break;
         
                 case "original":
+                    // eslint-disable-next-line
                     originals = [...originals, { id: doc.id, ...doc.data() }];
                     break;
         
                 case "trending":
+                    // eslint-disable-next-line
                     trending = [...trending, { id: doc.id, ...doc.data() }];
                     break;
                     
