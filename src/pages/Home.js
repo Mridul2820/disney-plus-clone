@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import ImageSlide from '../components/ImageSlide'
+import Recommends from '../components/Recommends'
 import Viewers from '../components/Viewers'
 
 const Home = () => {
@@ -8,6 +9,7 @@ const Home = () => {
         <StyledContainer>
             <ImageSlide />
             <Viewers />
+            <Recommends />
         </StyledContainer>
     )
 }

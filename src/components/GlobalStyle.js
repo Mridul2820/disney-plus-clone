@@ -35,6 +35,10 @@ const GlobalStyle = createGlobalStyle`
         color: #f9f9f9;
         text-decoration: none;
     }
+
+    h4 {
+        margin: 24px 0;
+    }
 `
 
 export default GlobalStyle;
