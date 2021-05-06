@@ -12,6 +12,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import db from '../firebase/firebase'
 import { setMovies } from '../features/movie/movieSlice'
 import { selectUserName } from '../features/user/userSlice'
+import Footer from '../components/Footer'
 
 const Home = () => {
     const dispatch = useDispatch();
@@ -70,6 +71,7 @@ const Home = () => {
             <NewDisney />
             <Originals />
             <Trending />
+            <Footer />
         </StyledContainer>
     )
 }
