@@ -1,14 +1,37 @@
-import React from 'react'
+import { useEffect, useState } from "react";
 import styled from 'styled-components'
+import { useParams } from "react-router-dom";
+import db from "../firebase/firebase";
 
 const Detail = () => {
+    const { id } = useParams();
+    const [detailData, setDetailData] = useState({});
+
+    useEffect(() => {
+        db.collection("movies")
+            .doc(id)
+            .get()
+            .then((doc) => {
+                if (doc.exists) {
+                    setDetailData(doc.data());
+                } else {
+                    console.log("no such document in firebase");
+                }
+            })
+            .catch((error) => {
+                console.log("Error getting document:", error);
+            });
+    }, [id]);
+    
     return (
         <StyledContainer>
-            <StyledBackground />
+            <StyledBackground
+                style={{backgroundImage: `url(${detailData.backgroundImg})`}}
+            />
             <StyledImageTitle>
                 <img
-                    src="https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/4A67A42FB16607DAE7E22266D3F00181965178ED1884047C2D982EE7D89D3554/scale?width=1440&aspectRatio=1.78"
-                    alt=""
+                    src={detailData.titleImg}
+                    alt={detailData.title}
                 />
             </StyledImageTitle>
             <StyledMeta>
@@ -37,8 +60,8 @@ const Detail = () => {
                         </div>
                     </StyledGroupWatch>
                 </StyledControls>
-                <StyledSubTitle>2021 • 1 Season • Science Fiction, Action-Adventure, Buddy</StyledSubTitle>
-                <StyledDescription>Marvel Studios’ “The Falcon and The Winter Soldier” stars Anthony Mackie as Sam Wilson aka The Falcon, and Sebastian Stan as Bucky Barnes aka The Winter Soldier. The pair, who came together in the final moments of “Avengers: Endgame,” team up on a global adventure that tests their abilities—and their patience.</StyledDescription>
+                <StyledSubTitle>{detailData.subTitle}</StyledSubTitle>
+                <StyledDescription>{detailData.description}</StyledDescription>
             </StyledMeta>
         </StyledContainer>
     )
@@ -61,7 +84,6 @@ const StyledBackground = styled.div`
     top: 0;
     opacity: 0.8;
     z-index: -4;
-    background-image: url('https://prod-ripcut-delivery.disney-plus.net/v1/variant/disney/456A711C19899C881600F6247705E5253EB18C2471D75E5281E1FF6ACB6D2FBA/scale?width=1440&aspectRatio=1.78&format=jpeg');
     background-position: top right;
     background-size: cover;
     background-repeat: no-repeat;
@@ -90,6 +112,7 @@ const StyledImageTitle = styled.div`
 const StyledMeta = styled.div`
     max-width: 874px;
 `
+
 const StyledControls = styled.div`
     display: flex;
     align-items: center;
@@ -218,7 +241,7 @@ const StyledDescription = styled.div`
     font-size: 20px;
     padding: 16px 0px;
     color: rgb(249, 249, 249);
-    
+
     @media (max-width: 768px) {
         font-size: 14px;
     }
