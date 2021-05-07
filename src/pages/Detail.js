@@ -2,10 +2,12 @@ import { useEffect, useState } from "react";
 import styled from 'styled-components'
 import { useParams } from "react-router-dom";
 import db from "../firebase/firebase";
+import TrailerPopup from "../components/TrailerPopup";
 
 const Detail = () => {
     const { id } = useParams();
     const [detailData, setDetailData] = useState({});
+    const [showTrailer, setShowTrailer] = useState(false)
 
     useEffect(() => {
         db.collection("movies")
@@ -24,6 +26,13 @@ const Detail = () => {
     }, [id]);
     
     return (
+        <>
+        {showTrailer && 
+            <TrailerPopup 
+                url={detailData.trailer}
+                setShowTrailer={setShowTrailer}
+            />
+        }
         <StyledContainer>
             <StyledBackground
                 style={{backgroundImage: `url(${detailData.backgroundImg})`}}
@@ -43,7 +52,7 @@ const Detail = () => {
                         />
                         <span>Play</span>
                     </StyledPlayer>
-                    <StyledTrailer>
+                    <StyledTrailer onClick={() => setShowTrailer(true)}>
                         <img 
                             src="/images/play-icon-white.png" 
                             alt="play-icon-white" 
@@ -56,7 +65,7 @@ const Detail = () => {
                     </StyledAddList>
                     <StyledGroupWatch>
                         <div>
-                        <img src="/images/group-icon.png" alt="" />
+                            <img src="/images/group-icon.png" alt="group-icon" />
                         </div>
                     </StyledGroupWatch>
                 </StyledControls>
@@ -64,12 +73,14 @@ const Detail = () => {
                 <StyledDescription>{detailData.description}</StyledDescription>
             </StyledMeta>
         </StyledContainer>
+        </>
     )
 }
 
 const StyledContainer = styled.div`
     position: relative;
-    height: calc(100vh - 70px);
+    min-height: calc(100vh - 70px);
+    height: 100%;
     overflow-x: hidden;
     display: block;
     top: 72px;
@@ -87,7 +98,9 @@ const StyledBackground = styled.div`
     background-position: top right;
     background-size: cover;
     background-repeat: no-repeat;
-    height: calc(100vh - 70px);
+    background-attachment: fixed;
+    min-height: 100vh;
+    height: 100%;
     width: 100vw;
 `;
 
@@ -122,7 +135,7 @@ const StyledControls = styled.div`
 `
 
 const StyledPlayer = styled.button`
-    margin: 0px  0px 0px 22px;
+    margin: 0px 22px 0px 0px;
     padding: 8px 20px;
     border-radius: 4px;
     cursor: pointer;
