@@ -61,27 +61,27 @@ const Header = () => {
                 :
                 <>
                 <StyledNavMenu>
-                    <a href="/home">
+                    <a href="/home" className="mid-small">
                         <img src="/images/home-icon.svg" alt="home-icon"/>
                         <span>Home</span>
                     </a>
-                    <a href="/">
+                    <a href="/" className="mid-small">
                         <img src="/images/search-icon.svg" alt="search-icon"/>
                         <span>Search</span>
                     </a>
-                    <a href="/">
+                    <a href="/" className="mid-small">
                         <img src="/images/watchlist-icon.svg" alt="watchlist-icon"/>
                         <span>Watchlist</span>
                     </a>
-                    <a href="/">
+                    <a href="/" className="mid-hide">
                         <img src="/images/original-icon.svg" alt="original-icon"/>
                         <span>Originals</span>
                     </a>
-                    <a href="/">
+                    <a href="/" className="mid-hide">
                         <img src="/images/movie-icon.svg" alt="movie-icon"/>
                         <span>Movies</span>
                     </a>
-                    <a href="/">
+                    <a href="/" className="mid-hide">
                         <img src="/images/series-icon.svg" alt="series-icon"/>
                         <span>Series</span>
                     </a>
@@ -107,7 +107,7 @@ const StyledNav = styled.nav`
     background-color: #090b13;
     display: flex;
     align-items: center;
-    padding: 0 36px;
+    padding: 0 30px;
     letter-spacing: 16px;
     z-index: 3;
 `
@@ -128,7 +128,7 @@ const StyledLogo = styled.a`
 const StyledNavMenu = styled.div`
     display: flex;
     align-items: center;
-    margin-left: 25px;
+    margin-left: 10px;
 
     a {
         display: flex;
@@ -136,6 +136,22 @@ const StyledNavMenu = styled.div`
         padding: 0 12px;
         cursor: pointer;
         text-decoration: none;
+
+        @media (max-width: 640px) {
+            padding: 0 6px;
+        }
+
+        &.mid-hide {
+            @media (max-width: 768px) {
+                display: none;
+            }
+        }
+
+        &.mid-small {
+            @media (max-width: 480px) {
+                display: none;
+            }
+        }
 
         img {
             height: 20px;
